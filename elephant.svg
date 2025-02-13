@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Elephant Body -->
+  <ellipse cx="100" cy="140" rx="40" ry="30" fill="#AEDFF7" />
+  <!-- Elephant Head -->
+  <circle cx="100" cy="90" r="30" fill="#AEDFF7" />
+  <!-- Left Ear -->
+  <ellipse cx="70" cy="90" rx="12" ry="20" fill="#AEDFF7" />
+  <!-- Right Ear -->
+  <ellipse cx="130" cy="90" rx="12" ry="20" fill="#AEDFF7" />
+  <!-- Trunk -->
+  <path d="M100,110 Q95,125 105,140" stroke="#AEDFF7" stroke-width="10" fill="none" stroke-linecap="round" />
+  <!-- Tail -->
+  <path d="M140,150 Q150,155 145,165" stroke="#AEDFF7" stroke-width="5" fill="none" stroke-linecap="round" />
+  <!-- Balloon String -->
+  <path d="M105,140 Q100,100 110,60" stroke="#555" stroke-width="2" fill="none" />
+  <!-- Balloon -->
+  <circle cx="110" cy="50" r="10" fill="#FF6666" />
+</svg>
