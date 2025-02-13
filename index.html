@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Floating Baby Blue Elephants</title>
+  <!-- Import Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Meow+Script&family=Open+Sans&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: url('/background.webp') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Open Sans', sans-serif;
+      color: #333;
+      padding: 20px;
+      position: relative;
+    }
+    
+    /* Main Content Container */
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 90%;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+    
+    h1 {
+      font-family: 'Meow Script', cursive;
+      font-size: 4em;
+      color: #2f2f2f;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5em;
+      max-width: 600px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    
+    .elephant {
+      width: 400px;
+      max-width: 80%;
+      /* border: 5px solid #ff66cc; */
+      border-radius: 15px;
+      /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+      margin-bottom: 20px;
+    }
+    
+    .heart {
+      width: 80px;
+      max-width: 80%;
+      margin-bottom: 20px;
+      animation: heartbeat 1.5s infinite;
+    }
+    
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25%, 75% { transform: scale(1.2); }
+      50% { transform: scale(1); }
+    }
+    
+    /* Floating Elephants Container - now placed above the main content */
+    #floating-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none; /* So floating images don’t interfere with clicks */
+      z-index: 3; /* Above the main container */
+    }
+    
+    /* Style for each floating elephant image */
+    .floating-elephant {
+      position: absolute;
+      width: 80px; /* Adjust size as needed */
+      transition: left 8s ease-in-out, top 8s ease-in-out;
+      /* Default bob animation; different speeds and delays will be assigned via nth-child */
+      animation-name: bob;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+    
+    @keyframes bob {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    
+    /* Different speeds and delays for each elephant to desynchronize the bobbing */
+    .floating-elephant:nth-child(1) {
+      animation-duration: 2.5s;
+      animation-delay: 0s;
+    }
+    .floating-elephant:nth-child(2) {
+      animation-duration: 3.2s;
+      animation-delay: 0.5s;
+    }
+    .floating-elephant:nth-child(3) {
+      animation-duration: 2.8s;
+      animation-delay: 1s;
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Valentine Content -->
+  <div class="container">
+    <img class="elephant" src="/centre-main.png" alt="Cute Elephant">
+    <h1>Happy Valentine's Day</h1>
+    <img class="heart" src="/heart_plant.png" alt="Heart">
+    <p>
+      I hope this little surprise brings a smile to your face. </br>
+      Happy Valentine's day my cutu putu!
+      I’m so grateful to have you by my side. You make my world brighter, my heart fuller, and my life so much more beautiful. ❤️
+    </p>
+  </div>
+
+  <!-- Floating Elephants -->
+  <div id="floating-container">
+    <img class="floating-elephant" src="elephant.svg" alt="Floating Elephant">
+    <img class="floating-elephant" src="elephant.svg" alt="Floating Elephant">
+    <img class="floating-elephant" src="elephant_1.svg" alt="Floating Elephant">
+    <img class="floating-elephant" src="elephant_1.svg" alt="Floating Elephant">
+    <img class="floating-elephant" src="elephant_1.svg" alt="Floating Elephant">
+    <img class="floating-elephant" src="elephant_2.svg" alt="Floating Elephant">
+    <img class="floating-elephant" src="elephant_2.svg" alt="Floating Elephant">
+  </div>
+  
+  <!-- JavaScript for small random repositioning -->
+  <script>
+    // Constrain elephants to float in the top 30% of the viewport.
+    const maxTop = window.innerHeight * 0.9;
+    
+    // Initialize each floating elephant with a random starting position.
+    function initElephants() {
+      const elephants = document.querySelectorAll('.floating-elephant');
+      elephants.forEach(elephant => {
+        const initialLeft = Math.random() * (window.innerWidth - elephant.offsetWidth);
+        const initialTop = Math.random() * maxTop;
+        elephant.style.left = initialLeft + 'px';
+        elephant.style.top = initialTop + 'px';
+      });
+    }
+    
+    // Move each elephant by a small random offset (up to ±20px in both x and y directions)
+    function moveElephants() {
+      const elephants = document.querySelectorAll('.floating-elephant');
+      elephants.forEach(elephant => {
+        // Get the current positions.
+        let currentLeft = parseFloat(elephant.style.left) || 0;
+        let currentTop = parseFloat(elephant.style.top) || 0;
+        
+        // Calculate a small random offset.
+        const deltaX = (Math.random() - 0.5) * 80; // Range: -20 to +20
+        const deltaY = (Math.random() - 0.5) * 80; // Range: -20 to +20
+        
+        let newLeft = currentLeft + deltaX;
+        let newTop = currentTop + deltaY;
+        
+        // Constrain left to the viewport width.
+        newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - elephant.offsetWidth));
+        // Constrain top to the top area (0 to maxTop).
+        newTop = Math.max(0, Math.min(newTop, maxTop));
+        
+        elephant.style.left = newLeft + 'px';
+        elephant.style.top = newTop + 'px';
+      });
+    }
+    
+    initElephants();
+    // Update elephant positions every 8 seconds with small offsets.
+    setInterval(moveElephants, 8000);
+  </script>
+</body>
+</html>
